@@ -46,6 +46,7 @@ wss.on('connection', function connection(client) {
       wss.broadcast('endGame');
     }
     if (message === 'clearLobby') {
+      users = [];
       wss.broadcast('clearLobby');
     }
   });
