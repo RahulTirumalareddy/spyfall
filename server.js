@@ -1,4 +1,4 @@
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const path = require('path');
 const INDEX = path.join(__dirname, 'index.html');
 const express = require('express');
