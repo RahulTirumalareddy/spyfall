@@ -1,0 +1,26 @@
+{
+  "name": "spyfall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RahulTirumalareddy/spyfall.git"
+  },
+  "author": "Rahul Tirumalareddy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RahulTirumalareddy/spyfall/issues"
+  },
+  "homepage": "https://github.com/RahulTirumalareddy/spyfall#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "path": "^0.12.7",
+    "ws": "^4.0.0"
+  }
+}

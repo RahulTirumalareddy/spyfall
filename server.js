@@ -1,9 +1,19 @@
+const PORT = 8080;
+const path = require('path');
+const INDEX = path.join(__dirname, 'index.html');
+const express = require('express');
+const app = express();
+
+app.use((req, res) => res.sendFile(INDEX));
+
+const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 const WebSocket = require('ws');
 const moment = require('moment');
+const wss = new WebSocket.Server({ server });
+
 
 var users = [];
-
-const wss = new WebSocket.Server({ port: 8080 });
+var locations = ['Beach', 'Broadway Theater', 'Casino', 'Circus Tent', 'Day Spa'];
 
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
@@ -21,13 +31,23 @@ wss.on('connection', function connection(client) {
       users.push(username);
       wss.broadcast('newUser' + username);
     }
-
     if (message.startsWith('delete')) {
       let username = message.substring(6);
       let index = users.indexOf(username);
       users.splice(index,1);
       wss.broadcast('delete' + username);
     }
-
+    if (message === 'startGame') {
+      let spy = users[getRandomInt(users.length)];
+      let location = locations[getRandomInt(locations.length)];
+      wss.broadcast('startGame' + ',' + spy + ',' + location);
+    }
+    if (message === 'endGame') {
+      wss.broadcast('endGame');
+    }
   });
 });
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
