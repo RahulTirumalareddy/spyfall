@@ -14,12 +14,20 @@ wss.broadcast = function broadcast(data) {
 };
 
 wss.on('connection', function connection(client) {
-  client.send("users" + JSON.stringify(users));
+  client.send("initialUsers" + JSON.stringify(users));
   client.on('message', function incoming(message) {
     if (message.startsWith('newUser')) {
       let username = message.substring(7);
       users.push(username);
       wss.broadcast('newUser' + username);
     }
+
+    if (message.startsWith('delete')) {
+      let username = message.substring(6);
+      let index = users.indexOf(username);
+      users.splice(index,1);
+      wss.broadcast('delete' + username);
+    }
+
   });
 });
