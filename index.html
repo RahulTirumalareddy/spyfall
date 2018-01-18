@@ -17,10 +17,6 @@
         }
       });
 
-      server.addEventListener('open', function (event) {
-          server.send('Hello Server!');
-      });
-
       server.addEventListener('message', function (event) {
           let message = event.data;
           if (message.startsWith('initialUsers')) {
@@ -61,8 +57,18 @@
             gameInProgress = false;
             document.getElementById('my_role').innerHTML = '';
           }
+
+          if (message.startsWith('clearLobby')) {
+            users = [];
+            username = null;
+            document.getElementById('users').innerHTML = '';
+            document.getElementById('username_input').style.visibility = 'visible';
+            document.getElementById('join_button').style.visibility = 'visible';
+            changeNumberInLobby(0);
+          }
           startButtonCheck();
           endButtonCheck();
+          clearButtonCheck();
       });
 
       function addToUserList(user) {
@@ -91,9 +97,8 @@
         if (!users.includes(input) && input.length > 0 && !input.includes(',')) {
           server.send('newUser' + username_input.value);
           username = username_input.value;
-          username_input.parentNode.removeChild(username_input);
-          let button = document.getElementById('join_button');
-          button.parentNode.removeChild(button);
+          document.getElementById('username_input').style.visibility = 'hidden';
+          document.getElementById('join_button').style.visibility = 'hidden';
         } else {
           if (input.length <= 0) {
             alert('Username must be at least one character!');
@@ -113,6 +118,16 @@
         server.send('endGame');
       }
 
+      function clearLobby() {
+        server.send('clearLobby');
+        /*
+        var input = document.createElement("input");
+        input.autocomplete = false;
+        input.placeholder = 'Username';
+        input.id = 'username_input';
+        */
+      }
+
       function startButtonCheck() {
         let button = document.getElementById('start_button');
         if (users.length > 2 && !gameInProgress) {
@@ -130,17 +145,29 @@
           button.disabled = true;
         }
       }
+
+      function clearButtonCheck() {
+        let button = document.getElementById('clear_button');
+        if (users.length == 0) {
+          button.disabled = true;
+        } else {
+          button.disabled = false;
+        }
+      }
+
       function changeNumberInLobby(newNumber) {
         numberInLobby = newNumber;
-        document.getElementById('numberInLobby').innerHTML = numberInLobby;
+        document.getElementById('numberInLobby').innerHTML = `(${numberInLobby})`;
       }
+
+
 
     </script>
   </head>
   <body>
     <div id='my_role'></div>
     <h1> Spyfall </h1>
-    <h3> Users in Lobby (<span id='numberInLobby'>0</span>) </h3>
+    <h3> Users in Lobby <span id='numberInLobby'>(0)</span> </h3>
     <ul id='users'></ul>
     <input autocomplete='off' type='text' id='username_input' placeholder='Username'>
     <button id='join_button' onclick='submitUsername()'>Join Lobby</button>
@@ -148,5 +175,6 @@
     <br>
     <button disabled id='start_button' onclick='startGame()'>Start Game</button>
     <button disabled id='end_button' onclick='endGame()'>End Game</button>
+    <button disabled id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
   </body>
 </html>

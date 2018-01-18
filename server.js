@@ -45,6 +45,9 @@ wss.on('connection', function connection(client) {
     if (message === 'endGame') {
       wss.broadcast('endGame');
     }
+    if (message === 'clearLobby') {
+      wss.broadcast('clearLobby');
+    }
   });
 });
 
