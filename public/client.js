@@ -55,7 +55,7 @@ server.addEventListener('message', function (event) {
       gameInProgress = false;
       document.getElementById('my_role').style.opacity = 0;
       setTimeout(function(){
-        document.getElementById('my_role').innerHTML = 'placeholder';
+        document.getElementById('my_role').innerHTML = '';
       }, 1000);
     }
 
