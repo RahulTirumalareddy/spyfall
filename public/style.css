@@ -1,4 +1,8 @@
+html {
+  height: 90%;
+}
 body {
+  height:100%;
   margin: 10px;
   text-align: center;
   font-family: 'Barlow', sans-serif;
@@ -27,6 +31,7 @@ input {
 .flex-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 ul {
@@ -96,3 +101,7 @@ ul {
    border-bottom: 1px solid #4CAFE9 !important;
    box-shadow: 0 1px 0 0 #4CAFE9 !important;
  }
+
+#modal_trigger {
+  margin-bottom: auto;
+}

@@ -19,14 +19,27 @@
           <input autofocus autocomplete='off' type='text' id="username_input" type="text" class="validate">
           <label class="mat-label" for="last_name">Username</label>
       </div>
-      <!--<input autofocus autocomplete='off' type='text' id='username_input' placeholder='Username'>-->
-      <button class="waves-effect waves-teal btn-flat" id='join_button' onclick='submitUsername()'> Join Lobby</button>
+      <button class="waves-effect waves-teal red accent-2 btn" id='join_button' onclick='submitUsername()'> Join Lobby</button>
       <br>
       <span>
         <button class="waves-effect waves-light disabled" id='start_button' onclick='startGame()'>Start Game</button>
         <button class="waves-effect waves-light disabled" id='end_button' onclick='endGame()'>End Game</button>
         <button class="waves-effect waves-light disabled" id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
       </span>
+      <div id='information_modal' class='modal'>
+        <div class='modal-content'>
+          <h4>How To Play</h4>
+          <p>
+            The goal of SpyFall is to find out who the spy is, or if you're the spy, to stay hidden and find out the secret location.
+            After everyone playing joins the lobby, the game can be started. Once started, the game randomly assigns one player to be the spy, and everyone else
+            is informed of the secret location. One player is chosen to start the questioning. For the non-spies, questioning serves as a way to find out who the
+            spy is and let the others know that you yourself are not the spy. However, the non-spies must be careful not to leak too much information, as at any time,
+            the spy can reveal himself and guess the secret location. If he guesses correctly, the spy wins and the game ends; if he guesses wrongly, the non-spies win.
+            Similarly, at any time, the non-spies can guess who the spy is. If they guess correctly, the non-spies win.
+          </p>
+        </div>
+      </div>
     </div>
+    <a class="waves-effect waves-light blue accent-1 btn modal-trigger" id="modal_trigger" href="#information_modal">Help</a>
   </body>
 </html>

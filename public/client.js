@@ -7,6 +7,7 @@ var gameInProgress = false;
 
 document.addEventListener("DOMContentLoaded", function() {
   $('select').material_select();
+  $('.modal').modal();
   document.getElementById('username_input').onkeydown = function(e){
     if(e.keyCode == 13){
       submitUsername();
@@ -107,10 +108,10 @@ function submitUsername() {
       alert('Username must be at least one character!');
     } else if (input.includes(',')) {
       alert('Username cannot have commas [fuck up some commas]');
-    } else if (input.includes('bahul') || input.includes('Bahul')) {
+    } else if (input.includes('bahul')) {
       alert('no');
     } else {
-      alert('Username already exists with that name');
+      alert('Username exists with that name!')
     }
   }
 }
