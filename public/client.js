@@ -44,22 +44,27 @@ server.addEventListener('message', function (event) {
       let location = arr[2];
       if (username === spy) {
         document.getElementById('my_role').innerHTML = 'You are the spy.';
+        document.getElementById('my_role').style.opacity = 1;
       } else {
         document.getElementById('my_role').innerHTML = `You are not the spy. The location is ${location}`;
+        document.getElementById('my_role').style.opacity = 1;
       }
     }
 
     if (message.startsWith('endGame')) {
       gameInProgress = false;
-      document.getElementById('my_role').innerHTML = '';
+      document.getElementById('my_role').style.opacity = 0;
+      setTimeout(function(){
+        document.getElementById('my_role').innerHTML = 'placeholder';
+      }, 1000);
     }
 
     if (message.startsWith('clearLobby')) {
       users = [];
       username = null;
       document.getElementById('users').innerHTML = '';
-      document.getElementById('username_input').style.visibility = 'visible';
-      document.getElementById('join_button').style.visibility = 'visible';
+      document.getElementById('username_input').style.display = 'inline-block';
+      document.getElementById('join_button').style.display = 'inline-block';
       changeNumberInLobby(0);
     }
     startButtonCheck();
@@ -94,8 +99,8 @@ function submitUsername() {
   if (!users.includes(input) && input.length > 0 && !input.includes(',')) {
     server.send('newUser' + username_input.value);
     username = username_input.value;
-    document.getElementById('username_input').style.visibility = 'hidden';
-    document.getElementById('join_button').style.visibility = 'hidden';
+    document.getElementById('username_input').style.display = 'none';
+    document.getElementById('join_button').style.display = 'none';
   } else {
     if (input.length <= 0) {
       alert('Username must be at least one character!');

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href='/style.css'>
     <link href="https://fonts.googleapis.com/css?family=Barlow|VT323|Monoton" rel="stylesheet">
@@ -9,16 +9,18 @@
   </head>
   <body>
     <div class="flex-container">
-      <div id='my_role'></div>
+      <div id='my_role'>placeholder</div>
       <h1>SpyFall</h1>
-      <h3> Users in Lobby <span id='numberInLobby'>(0)</span> </h3>
+      <h4>Users <span id='numberInLobby'>(0)</span></h3>
       <ul id='users'></ul>
-      <input style="margin-bottom:10px" autocomplete='off' type='text' id='username_input' placeholder='Username'>
+      <input style="margin-bottom:10px" autofocus autocomplete='off' type='text' id='username_input' placeholder='Username'>
       <button class="waves-effect waves-teal btn-flat" id='join_button' onclick='submitUsername()'> Join Lobby</button>
       <br>
-      <button class="btn-flat disabled" id='start_button' onclick='startGame()'>Start Game</button>
-      <button class="btn-flat disabled" id='end_button' onclick='endGame()'>End Game</button>
-      <button class="btn-flat disabled" id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
+      <span>
+        <button class="btn-flat disabled" id='start_button' onclick='startGame()'>Start Game</button>
+        <button class="btn-flat disabled" id='end_button' onclick='endGame()'>End Game</button>
+        <button class="btn-flat disabled" id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
+      </span>
     </div>
   </body>
 </html>

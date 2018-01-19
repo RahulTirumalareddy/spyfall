@@ -2,14 +2,22 @@ body {
   margin: 10px;
   text-align: center;
   font-family: 'Barlow', sans-serif;
+  background-image: url('shapes.png');
+  background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 h1 {
   font-family: 'Monoton', cursive;
   font-weight: normal;
-  margin:0px;
+  margin:5px;
+  color:#4CAFE9;
 }
-h3 {
-  font-family: 'VT323', monospace;
+h4 {
+  font-family:  'VT323', sans-serif;
+  font-size: 35px;
+  color:#B3B2B2;
 }
 input {
   width: 80%;
@@ -19,4 +27,41 @@ input {
 .flex-container {
   display: flex;
   flex-direction: column;
+}
+
+ul {
+  font-size:20px;
+  margin:10px;
+}
+
+#join_button {
+  width:auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#my_role {
+  opacity:0;
+  transition: opacity 1s linear;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
 }
