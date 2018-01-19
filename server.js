@@ -3,7 +3,7 @@ const path = require('path');
 const INDEX = path.join(__dirname, 'index.html');
 const express = require('express');
 const app = express();
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res) => res.sendFile(INDEX));
 
 const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -13,7 +13,9 @@ const wss = new WebSocket.Server({ server });
 
 
 var users = [];
-var locations = ['Beach', 'Broadway Theater', 'Casino', 'Circus Tent', 'Day Spa'];
+var locations = ['Beach','Broadway Theater','Casino','Circus Tent','Bank','Day Spa','Hotel','Restaurant','Supermarket',
+'Service Station','Hospital','Embassy','Military Base','Police Station','School','University','Airplane','Ocean Liner',
+'Passenger Train','Submarine','Cathedral','Corporate Party','Movie Studio','Crusader Army','Pirate Ship','Polar Station','Space Station'];
 
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
@@ -24,7 +26,7 @@ wss.broadcast = function broadcast(data) {
 };
 
 wss.on('connection', function connection(client) {
-  client.send("initialUsers" + JSON.stringify(users));
+  client.send('initialUsers' + JSON.stringify(users));
   client.on('message', function incoming(message) {
     if (message.startsWith('newUser')) {
       let username = message.substring(7);

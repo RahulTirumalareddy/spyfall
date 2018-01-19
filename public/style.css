@@ -1,0 +1,22 @@
+body {
+  margin: 10px;
+  text-align: center;
+  font-family: 'Barlow', sans-serif;
+}
+h1 {
+  font-family: 'Monoton', cursive;
+  font-weight: normal;
+  margin:0px;
+}
+h3 {
+  font-family: 'VT323', monospace;
+}
+input {
+  width: 80%;
+  padding-left: 10px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
