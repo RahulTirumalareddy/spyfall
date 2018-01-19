@@ -6,6 +6,7 @@ var numberInLobby;
 var gameInProgress = false;
 
 document.addEventListener("DOMContentLoaded", function() {
+  $('select').material_select();
   document.getElementById('username_input').onkeydown = function(e){
     if(e.keyCode == 13){
       submitUsername();
@@ -63,7 +64,7 @@ server.addEventListener('message', function (event) {
       users = [];
       username = null;
       document.getElementById('users').innerHTML = '';
-      document.getElementById('username_input').style.display = 'inline-block';
+      document.getElementById('input_div').style.display = 'inline-block';
       document.getElementById('join_button').style.display = 'inline-block';
       changeNumberInLobby(0);
     }
@@ -99,13 +100,15 @@ function submitUsername() {
   if (!users.includes(input) && input.length > 0 && !input.includes(',')) {
     server.send('newUser' + username_input.value);
     username = username_input.value;
-    document.getElementById('username_input').style.display = 'none';
+    document.getElementById('input_div').style.display = 'none';
     document.getElementById('join_button').style.display = 'none';
   } else {
     if (input.length <= 0) {
       alert('Username must be at least one character!');
     } else if (input.includes(',')) {
       alert('Username cannot have commas [fuck up some commas]');
+    } else if (input.includes('bahul') || input.includes('Bahul')) {
+      alert('no');
     } else {
       alert('Username already exists with that name');
     }
@@ -127,27 +130,27 @@ function clearLobby() {
 function startButtonCheck() {
   let button = document.getElementById('start_button');
   if (users.length > 2 && !gameInProgress) {
-    button.className = 'waves-effect waves-teal btn-flat';
+    button.className = 'waves-effect blue accent-1 waves-light btn';
   } else {
-    button.className = 'btn-flat disabled';
+    button.className = 'btn disabled';
   }
 }
 
 function endButtonCheck() {
   let button = document.getElementById('end_button');
   if (gameInProgress) {
-    button.className = 'waves-effect waves-teal btn-flat';
+    button.className = 'waves-effect blue accent-1 waves-light btn';
   } else {
-    button.className = 'btn-flat disabled';
+    button.className = 'btn disabled';
   }
 }
 
 function clearButtonCheck() {
   let button = document.getElementById('clear_button');
   if (users.length == 0) {
-    button.className = 'btn-flat disabled';
+    button.className = 'btn disabled';
   } else {
-    button.className = 'waves-effect waves-teal btn-flat';
+    button.className = 'waves-effect blue accent-1 waves-light btn';
   }
 }
 

@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href='/style.css'>
     <link href="https://fonts.googleapis.com/css?family=Barlow|VT323|Monoton" rel="stylesheet">
@@ -13,13 +15,17 @@
       <h1>SpyFall</h1>
       <h4>Users <span id='numberInLobby'>(0)</span></h3>
       <ul id='users'></ul>
-      <input style="margin-bottom:10px" autofocus autocomplete='off' type='text' id='username_input' placeholder='Username'>
+      <div class="input-field" id="input_div">
+          <input autofocus autocomplete='off' type='text' id="username_input" type="text" class="validate">
+          <label class="mat-label" for="last_name">Username</label>
+      </div>
+      <!--<input autofocus autocomplete='off' type='text' id='username_input' placeholder='Username'>-->
       <button class="waves-effect waves-teal btn-flat" id='join_button' onclick='submitUsername()'> Join Lobby</button>
       <br>
       <span>
-        <button class="btn-flat disabled" id='start_button' onclick='startGame()'>Start Game</button>
-        <button class="btn-flat disabled" id='end_button' onclick='endGame()'>End Game</button>
-        <button class="btn-flat disabled" id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
+        <button class="waves-effect waves-light disabled" id='start_button' onclick='startGame()'>Start Game</button>
+        <button class="waves-effect waves-light disabled" id='end_button' onclick='endGame()'>End Game</button>
+        <button class="waves-effect waves-light disabled" id='clear_button' onclick='clearLobby()'>Clear Lobby</button>
       </span>
     </div>
   </body>

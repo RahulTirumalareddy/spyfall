@@ -4,9 +4,9 @@ body {
   font-family: 'Barlow', sans-serif;
   background-image: url('shapes.png');
   background-attachment: fixed;
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 h1 {
   font-family: 'Monoton', cursive;
@@ -39,7 +39,15 @@ ul {
   margin-left: auto;
   margin-right: auto;
 }
-
+#start_button {
+  margin:5px;
+}
+#end_button {
+  margin:5px;
+}
+#clear_button {
+  margin:5px;
+}
 #my_role {
   opacity:0;
   transition: opacity 1s linear;
@@ -68,3 +76,23 @@ ul {
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
+
+/* label color */
+ .input-field label {
+   color: black !important;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+   color: black !important;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #4CAFE9 !important;
+   box-shadow: 0 1px 0 0 #4CAFE9 !important;
+ }
+
+ /* label underline focus color */
+ .input-field input[type=text] {
+   border-bottom: 1px solid #4CAFE9 !important;
+   box-shadow: 0 1px 0 0 #4CAFE9 !important;
+ }
