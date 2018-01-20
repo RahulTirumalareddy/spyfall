@@ -11,15 +11,15 @@
   </head>
   <body>
     <div class="flex-container">
-      <div  contentEditable=true id='my_role'></div>
+      <div contentEditable=true id='my_role'></div>
       <h1>SpyFall</h1>
       <h4>Users <span id='numberInLobby'>(0)</span></h3>
       <ul id='users'></ul>
       <div class="input-field" id="input_div">
-          <input autofocus autocomplete='off' type='text' id="username_input" type="text" class="validate">
+          <input autofocus autocomplete='off' type='text' id="username_input" type="text">
           <label class="mat-label" for="last_name">Username</label>
       </div>
-      <button class="waves-effect waves-teal red accent-2 btn" id='join_button' onclick='submitUsername()'> Join Lobby</button>
+      <button class="waves-effect waves-red red accent-2 btn" id='join_button' onclick='submitUsername()'>Join Lobby</button>
       <br>
       <span>
         <button class="waves-effect waves-light disabled" id='start_button' onclick='startGame()'>Start Game</button>
@@ -40,6 +40,6 @@
         </div>
       </div>
     </div>
-    <a class="waves-effect waves-light blue accent-1 btn modal-trigger" id="modal_trigger" href="#information_modal">Help</a>
+    <a class="waves-effect waves-light red accent-2 btn modal-trigger" id="modal_trigger" href="#information_modal">Help</a>
   </body>
 </html>

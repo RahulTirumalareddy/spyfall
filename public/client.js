@@ -67,6 +67,7 @@ server.addEventListener('message', function (event) {
       document.getElementById('users').innerHTML = '';
       document.getElementById('input_div').style.display = 'inline-block';
       document.getElementById('join_button').style.display = 'inline-block';
+
       changeNumberInLobby(0);
     }
     startButtonCheck();
@@ -98,7 +99,7 @@ window.onbeforeunload = window.onunload = function(e) {
 function submitUsername() {
   let username_input = document.getElementById("username_input");
   let input = username_input.value
-  if (!users.includes(input) && input.length > 0 && !input.includes(',')) {
+  if (!users.includes(input) && input.length > 0 && !input.includes(',') && !input.toLowerCase().includes('bahul')) {
     server.send('newUser' + username_input.value);
     username = username_input.value;
     document.getElementById('input_div').style.display = 'none';
@@ -107,8 +108,8 @@ function submitUsername() {
     if (input.length <= 0) {
       alert('Username must be at least one character!');
     } else if (input.includes(',')) {
-      alert('Username cannot have commas [fuck up some commas]');
-    } else if (input.includes('bahul')) {
+      alert('Username cannot have commas!');
+    } else if (input.toLowerCase().includes('bahul')) {
       alert('no');
     } else {
       alert('Username exists with that name!')
