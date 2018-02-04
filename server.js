@@ -13,9 +13,11 @@ const wss = new WebSocket.Server({ server });
 
 
 var users = [];
-var locations = ['Beach','Broadway Theater','Casino','Circus Tent','Bank','Day Spa','Hotel','Restaurant','Supermarket',
-'Service Station','Hospital','Embassy','Military Base','Police Station','School','University','Airplane','Ocean Liner',
-'Passenger Train','Submarine','Cathedral','Corporate Party','Movie Studio','Crusader Army','Pirate Ship','Polar Station','Space Station'];
+var locations = ['Beach','Broadway Theater','Casino','Circus Tent','Bank','Day Spa','Hotel','Restaurant',
+'Supermarket','Service Station','Hospital','Embassy','Military Base','Police Station','School','University',
+'Airplane','Ocean Liner', 'Passenger Train','Submarine','Cathedral','Corporate Party','Movie Studio',
+'Crusader Army','Pirate Ship','Polar Station','Space Station'];
+
 
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
@@ -27,18 +29,31 @@ wss.broadcast = function broadcast(data) {
 
 wss.on('connection', function connection(client) {
   client.send('initialUsers' + JSON.stringify(users));
+  client.send('initialLocations' + JSON.stringify(locations));
   client.on('message', function incoming(message) {
     if (message.startsWith('newUser')) {
       let username = message.substring(7);
       users.push(username);
       wss.broadcast('newUser' + username);
     }
-    if (message.startsWith('delete')) {
-      let username = message.substring(6);
+    if (message.startsWith('deleteUser')) {
+      let username = message.substring(10);
       let index = users.indexOf(username);
       users.splice(index,1);
-      wss.broadcast('delete' + username);
+      wss.broadcast('deleteUser' + username);
     }
+    if (message.startsWith('newLocation')) {
+      let location = message.substring(11);
+      locations.push(location);
+      wss.broadcast('newLocation' + location);
+    }
+    if (message.startsWith('deleteLocation')) {
+      let location = message.substring(14);
+      let index = users.indexOf(location);
+      locations.splice(index,1);
+      wss.broadcast('deleteLocation' + location);
+    }
+
     if (message === 'startGame') {
       let spy = users[getRandomInt(users.length)];
       let location = locations[getRandomInt(locations.length)];

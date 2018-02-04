@@ -2,8 +2,8 @@ html {
   height: 90%;
 }
 body {
-  height:100%;
   margin: 10px;
+  padding-bottom: 10px;
   text-align: center;
   font-family: 'Barlow', sans-serif;
   background-image: url('shapes.png');
@@ -11,6 +11,13 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  touch-action: none;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 h1 {
   font-family: 'Monoton', cursive;
@@ -31,7 +38,7 @@ input {
 .flex-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  margin-bottom: 10px;
 }
 
 ul {
@@ -103,5 +110,6 @@ ul {
  }
 
 #modal_trigger {
-  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
 }

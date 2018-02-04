@@ -1,19 +1,19 @@
 <!doctype html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, minimum-scale = 1, maximum-scale = 1, initial-scale = 1, user-scalable=0"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src='/client.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Barlow|VT323|Monoton" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href='/style.css'>
-    <link href="https://fonts.googleapis.com/css?family=Barlow|VT323|Monoton" rel="stylesheet">
-    <script src='/client.js'></script>
   </head>
   <body>
     <div class="flex-container">
       <div contentEditable=true id='my_role'></div>
       <h1>SpyFall</h1>
-      <h4>Users <span id='numberInLobby'>(0)</span></h3>
+      <h4>Users <span id='numberInLobby'>(0)</span></h4>
       <ul id='users'></ul>
       <div class="input-field" id="input_div">
           <input autofocus autocomplete='off' type='text' id="username_input" type="text">
@@ -39,7 +39,11 @@
           </p>
         </div>
       </div>
+      <br>
+      <br>
+      <div class='row' id="locations">
+      </div>
+      <a class="waves-effect waves-light red accent-2 btn modal-trigger" id="modal_trigger" href="#information_modal">Help</a>
     </div>
-    <a class="waves-effect waves-light red accent-2 btn modal-trigger" id="modal_trigger" href="#information_modal">Help</a>
   </body>
 </html>

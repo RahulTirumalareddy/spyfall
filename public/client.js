@@ -1,5 +1,10 @@
 var HOST = location.origin.replace(/^http/, 'ws');
 var server = new WebSocket(HOST);
+var locations = ['Beach','Broadway Theater','Casino','Circus Tent','Bank','Day Spa','Hotel','Restaurant',
+'Supermarket','Service Station','Hospital','Embassy','Military Base','Police Station','School','University',
+'Airplane','Ocean Liner', 'Passenger Train','Submarine','Cathedral','Corporate Party','Movie Studio',
+'Crusader Army','Pirate Ship','Polar Station','Space Station'];
+
 var username;
 var users;
 var numberInLobby;
@@ -24,6 +29,11 @@ server.addEventListener('message', function (event) {
       changeNumberInLobby(numberInLobby);
     }
 
+    if (message.startsWith('initialLocations')) {
+      locations = JSON.parse(message.substring(16));
+      locations.forEach(addToLocationList);
+    }
+
     if (message.startsWith('newUser')) {
       let newUser = message.substring(7);
       users.push(newUser);
@@ -31,12 +41,25 @@ server.addEventListener('message', function (event) {
       changeNumberInLobby(numberInLobby + 1);
     }
 
-    if (message.startsWith('delete')) {
-      let deletedUser = message.substring(6);
+    if (message.startsWith('newLocation')) {
+      let newLocation = message.substring(11);
+      locations.push(newLocation)
+      addToLocationList(newLocation);
+    }
+
+    if (message.startsWith('deleteUser')) {
+      let deletedUser = message.substring(10);
       let index = users.indexOf(deletedUser);
       users.splice(index, 1);
-      removeFromUserList(deletedUser);
+      removeFromPage(deletedUser);
       changeNumberInLobby(numberInLobby - 1);
+    }
+
+    if (message.startsWith('deleteLocation')) {
+      let deletedLocation = message.substring(14);
+      let index = locations.indexOf(deletedLocation);
+      locations.splice(index, 1);
+      removeFromPage(deletedLocation);
     }
 
     if (message.startsWith('startGame')) {
@@ -67,7 +90,6 @@ server.addEventListener('message', function (event) {
       document.getElementById('users').innerHTML = '';
       document.getElementById('input_div').style.display = 'inline-block';
       document.getElementById('join_button').style.display = 'inline-block';
-
       changeNumberInLobby(0);
     }
     startButtonCheck();
@@ -76,22 +98,33 @@ server.addEventListener('message', function (event) {
 });
 
 function addToUserList(user) {
-  let listElement = document.createElement('LI');
+  let listElement = document.createElement('li');
   let text = document.createTextNode(user);
   listElement.appendChild(text);
   listElement.id = user;
   document.getElementById("users").appendChild(listElement);
 }
 
-function removeFromUserList(user) {
-  let removedNode = document.getElementById(user);
+function addToLocationList(location) {
+  if (!document.getElementById(location)) {
+    let gridElement = document.createElement('div');
+    gridElement.className = 'col s3';
+    gridElement.innerHTML = location;
+    gridElement.id = location;
+    gridElement.onclick = toggleStrikeThrough;
+    document.getElementById('locations').appendChild(gridElement);
+  }
+}
+
+function removeFromPage(element) {
+  let removedNode = document.getElementById(element);
   removedNode.parentNode.removeChild(removedNode);
 }
 
 
 window.onbeforeunload = window.onunload = function(e) {
   if (username) {
-    server.send("delete" + username);
+    server.send("deleteUser" + username);
   }
   server.close();
 };
@@ -159,4 +192,12 @@ function clearButtonCheck() {
 function changeNumberInLobby(newNumber) {
   numberInLobby = newNumber;
   document.getElementById('numberInLobby').innerHTML = `(${numberInLobby})`;
+}
+
+function toggleStrikeThrough() {
+  if (this.style.getPropertyValue('text-decoration') != 'line-through') {
+    this.style.setProperty('text-decoration', 'line-through');
+  } else {
+    this.style.setProperty('text-decoration', 'none');
+  }
 }
